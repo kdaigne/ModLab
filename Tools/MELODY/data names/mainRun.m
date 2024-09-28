@@ -39,12 +39,17 @@ else
 end
 
 % #. SPIES
+digitsNumber=num2str(numel(num2str(max([10 spiesInfo.arrayNumber])))); % at least 2 digits
 for spiesNum=1:spiesInfo.arrayNumber
     headersSave.headersClass=[headersSave.headersClass repmat({'MATRIX'},1,spiesInfo.argumentNumberVect(spiesNum)+2)];
     headersSave.headersColumn=[headersSave.headersColumn num2cell(1:spiesInfo.argumentNumberVect(spiesNum)+2)];
     headersSave.headersExt=[headersSave.headersExt repmat({'.asc'},1,spiesInfo.argumentNumberVect(spiesNum)+2)];
     headersSave.headersFile=[headersSave.headersFile repmat(spiesInfo.nameArrayCell(spiesNum),1,spiesInfo.argumentNumberVect(spiesNum)+2)];
-    headersSave.headersName=[headersSave.headersName ['Iteration' 'Time' spiesInfo.nameArgumentsCell{spiesNum}]];
+    if spiesInfo.arrayNumber>1
+        headersSave.headersName=[headersSave.headersName [{['Iteration ' num2str(spiesNum,['%0' digitsNumber '.f'])]} {['Time ' num2str(spiesNum,['%0' digitsNumber '.f'])]} spiesInfo.nameArgumentsCell{spiesNum}]]; % number must be add after ite and time to obtain a unique name
+    else
+        headersSave.headersName=[headersSave.headersName ['Iteration' 'Time' spiesInfo.nameArgumentsCell{spiesNum}]];
+    end
     headersSave.headersType=[headersSave.headersType repmat({'UNIQUE'},1,spiesInfo.argumentNumberVect(spiesNum)+2)];
 end
 
