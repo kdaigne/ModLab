@@ -53,6 +53,15 @@ for spiesNum=1:spiesInfo.arrayNumber
     headersSave.headersType=[headersSave.headersType repmat({'UNIQUE'},1,spiesInfo.argumentNumberVect(spiesNum)+2)];
 end
 
+% #. Sort
+[~,indSort]=sort(lower(strcat(headersSave.headersFile,headersSave.headersName)));
+headersSave.headersName=headersSave.headersName(indSort);
+headersSave.headersType=headersSave.headersType(indSort);
+headersSave.headersFile=headersSave.headersFile(indSort);
+headersSave.headersExt=headersSave.headersExt(indSort);
+headersSave.headersClass=headersSave.headersClass(indSort);
+headersSave.headersColumn=headersSave.headersColumn(indSort);
+
 % #. Save
 save(pathHeaders,'-struct','headersSave');
 
