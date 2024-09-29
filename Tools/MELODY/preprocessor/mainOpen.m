@@ -27,12 +27,10 @@ if ~isfile([pathGUI filesep 'Save' filesep 'path_save.mat'])
 else
     load([pathGUI filesep 'Save' filesep 'path_save.mat']); % pathSimu
 end
-% #.#. Code
+% #.#. Paths
 pathCode=[pathSimu filesep 'CODE'];
 pathSave=[pathSimu filesep 'SAVE'];
-% #.#. Preprocessing path
-% Outputs are saved in a preprocessing folder inside the simulation path
-pathPrepro=[pathSimu filesep 'PREPROCESSING'];
+pathPrepro=[pathSimu filesep 'PREPROCESSING']; % Outputs are saved in a preprocessing folder inside the simulation path
 % #.#. Dir
 if exist(pathCode,'dir')==0
     mkdir(pathCode);
