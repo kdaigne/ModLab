@@ -1,1 +1,1 @@
-openFile(app,[pwd filesep 'Preprocessor' filesep 'MELODYLoadData.m']); % opens Packing2D
+openFile(app,[pwd filesep 'Preprocessor' filesep 'MELODYLoadData_Example.m']); % opens Packing2D
