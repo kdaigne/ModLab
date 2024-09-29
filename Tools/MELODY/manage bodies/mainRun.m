@@ -156,14 +156,18 @@ errorVerif=manageBodiesFunction(pathSimuImport,pathSimuExport,stepImport,stepExp
 
 if ~errorVerif
 
+    if ~exist([pathSimuImport filesep 'SAVE'],'dir')
+        mkdir([pathSimuImport filesep 'SAVE']);
+    end
+
     % #. Log
     if strcmpi(mode,'Import')
 
         % #.#. Import
 
-        logMsg={['Added on step ' stepImport];...
-            ['Imported bodies (old indexing): ' strjoin(bodiesExport)];...
-            ['Imported bodies (new indexing): ' strjoin(cellfun(@num2str,num2cell(bodiesBefore+1:bodiesBefore+numel(bodiesExport)),'UniformOutput',false))];...
+        logMsg={['Step ' stepImport];...
+            ['Bodies (old indexing): ' strjoin(bodiesExport)];...
+            ['Bodies (new indexing): ' strjoin(cellfun(@num2str,num2cell(bodiesBefore+1:bodiesBefore+numel(bodiesExport)),'UniformOutput',false))];...
             ['Shift (X,Y): [' num2str(xShift) ',' num2str(yShift) ']']};
         LogSave(logMsg,{''},'Bodies import',[pathSimuImport filesep 'SAVE' filesep 'LOG_save.log']);
 
@@ -171,8 +175,8 @@ if ~errorVerif
 
         % #.#. Delete
 
-        logMsg={['Deleted on step: ' stepImport]; ...
-            ['Deleted bodies: ' strjoin(bodiesExport)]};
+        logMsg={['Step: ' stepImport]; ...
+            ['Bodies: ' strjoin(bodiesExport)]};
         LogSave(logMsg,{''},'Bodies deletion',[pathSimuImport filesep 'SAVE' filesep 'LOG_save.log']);
 
     end
