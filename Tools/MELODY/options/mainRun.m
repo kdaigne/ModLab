@@ -11,7 +11,21 @@
 
 % #.#. Old options state
 tabNumber=findTab(app);
+refreshSteps(app,tabNumber,0);
+stepVal=find(strcmp(app.TabGroup.Children(tabNumber).Children(app.id.gridTabNumber).Children(app.id.gridProcessingNumber).Children(app.id.STEPSPanelNumber).Children(app.id.gridStepsNumber).Children(app.id.stepsListNumber).Items,...
+    app.TabGroup.Children(tabNumber).Children(app.id.gridTabNumber).Children(app.id.gridProcessingNumber).Children(app.id.STEPSPanelNumber).Children(app.id.gridStepsNumber).Children(app.id.stepsListNumber).Value),1,'first');
+step=app.TabGroup.Children(tabNumber).Children(app.id.gridTabNumber).Children(app.id.gridProcessingNumber).Children(app.id.STEPSPanelNumber).Children(app.id.gridStepsNumber).Children(app.id.stepsListNumber).Value;
 opts=optionsOnStep(app,tabNumber,'read',[]);
+
+% #. Warning
+if stepVal~=1
+    stepLast=app.TabGroup.Children(tabNumber).Children(app.id.gridTabNumber).Children(app.id.gridProcessingNumber).Children(app.id.STEPSPanelNumber).Children(app.id.gridStepsNumber).Children(app.id.stepsListNumber).Items{1};
+    answer = questdlg(['Warning: changes will be applied to step ' step ' and not to step ' stepLast '.'],'Warning','Continue','Cancel','Cancel');
+    figure(app.mainUIFigure);
+    if isempty(answer) || strcmpi(answer,'Cancel')
+        busyOff(app); return;
+    end
+end
 
 % #. Options selection
 optsList={'INITIALIZE_CZM' 'KILL_AT_EACH_SAVE' 'KILL_VELOCITY' 'MONITOR_BOUNDARIES' ...
@@ -23,6 +37,7 @@ indActiveOld=find(ismember(optsList,opts));
 activeList(indActiveOld)=repmat({'(active)'},1,numel(indActiveOld));
 displayedList=strcat(optsList,{' '},activeList); % shows current state
 [indActiveNew,tf]=listdlg('Name','Option','PromptString',{'Which options do you want to be active?'},'ListSize',[200 300],'listString',displayedList,'InitialValue',indActiveOld);
+figure(app.mainUIFigure);
 if ~tf; return; end
 
 % #. Processing
