@@ -45,7 +45,7 @@ NvarOptim=16;%0;                                    %Number of optimization vari
 RandomOrientation=1;                                %0 if the grains are to be oriented like their surrounding cell, 1 if they are to be randomly oriented
 
 %%%% Fourier Spectrum Properties %%%%
-TypeSpectrum=1;                                     %0:Taylored spectrum ; 1:Existing spectrum
+TypeSpectrum=0;                                     %0:Taylored spectrum ; 1:Existing spectrum
 COVSpectrum=0;                                      %COV of the Fourier descriptors
 TypeCOVSpectrum=1;                                  %0:Modes vary individually ; 1:Spectrum varies altogether
 
