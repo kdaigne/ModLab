@@ -236,6 +236,9 @@ for spiesNum=1:numel(nodeLoc)
             % #.#.#.#. Changing names
             k=0;
             for spiesNumTemp=2:numel(nodeLoc)
+                if all(~contains(spiesSections{spiesNum}(2:end),'<node>')) && body(spiesNumTemp)==body(spiesNum)
+                    spiesSections{spiesNumTemp}={''}; continue; % avoids duplicates (e.g. spies average on a body but several nodes were selected)
+                end
                 while 1
                     k=k+1;
                     nameDefault=['MELODYOutput' sprintf('%01d',k)];
@@ -245,8 +248,8 @@ for spiesNum=1:numel(nodeLoc)
                         break;
                     end
                 end
-                lineSplit=strsplit(spiesSections{1,spiesNumTemp}{1,1},' ');
-                spiesSections{1,spiesNumTemp}{1,1}=[nameDefault ' ' lineSplit{1,2} ' ' lineSplit{1,3}];
+                lineSplit=strsplit(spiesSections{spiesNumTemp}{1,1},' ');
+                spiesSections{spiesNumTemp}{1,1}=[nameDefault ' ' lineSplit{1,2} ' ' lineSplit{1,3}];
             end
             break;
         end
@@ -257,9 +260,15 @@ end
 % Not set directly, as easier to process if
 % the same set of parameters is applied to all note
 for spiesNum=1:numel(nodeLoc)
-    spiesSections{1,spiesNum}=cellfun(@(x) replace(x,'<body>',num2str(body(spiesNum))),spiesSections{1,spiesNum},'UniformOutput',false);
-    spiesSections{1,spiesNum}=cellfun(@(x) replace(x,'<node>',num2str(nodeLoc(spiesNum))),spiesSections{1,spiesNum},'UniformOutput',false);
+    spiesSections{spiesNum}=cellfun(@(x) replace(x,'<body>',num2str(body(spiesNum))),spiesSections{1,spiesNum},'UniformOutput',false);
+    spiesSections{spiesNum}=cellfun(@(x) replace(x,'<node>',num2str(nodeLoc(spiesNum))),spiesSections{1,spiesNum},'UniformOutput',false);
+    if spiesNum>1 && numel(spiesSections{spiesNum})>1
+        ind=ismember(spiesSections{spiesNum},[spiesSections{1:spiesNum-1}]);
+        spiesSections{spiesNum}(ind)=[]; % removes duplicates (e.g. spies average on a body but several nodes were selected); the criterion becore could not take in account -1 and <nodes> in the same spies
+    end
 end
+indToRemove=cellfun(@numel,spiesSections)<=1;
+spiesSections(indToRemove)=[]; % empty or only name
 
 % #. Writing SPIES in STATIC_CONTROL
 pathStatic=[pathSimu filesep 'CODE' filesep 'STATIC_CONTROL.asc'];
@@ -275,13 +284,33 @@ while 1
     if strcmp(dataSave{end},'SPIES')
         dataSave{end+1}=num2str(str2double(fgetl(fileID))+numel(spiesSections)); % Number of SPIES to be modified
         dataSave{end+1}=fgetl(fileID);
-        dataSave{end+1}=fgetl(fileID);
-        for i=1:arrayInfo.arrayNumber % Number of SPIES
-            dataSave{end+1}=fgetl(fileID);
-            for j=1:arrayInfo.argumentNumberVect(i) % Number of SPIES arguments
-                dataSave{end+1}=fgetl(fileID);
+        while isempty(strip(dataSave{end}))
+            dataSave{end+1}=fgetl(fileID); % Find next step
+            if feof(fileID)==1
+                msgbox('Cannot found SPIES part in STATIC_CONTROL.','Warning','warn');
+                fclose(fileID);
+                return;
             end
-            dataSave{end+1}=fgetl(fileID);
+        end
+        for i=1:arrayInfo.arrayNumber % Number of SPIES
+            while ~isempty(strip(dataSave{end}))
+                dataSave{end+1}=fgetl(fileID); % Space between each SPIES
+                if feof(fileID)==1
+                    msgbox('Cannot found SPIES part in STATIC_CONTROL.','Warning','warn');
+                    fclose(fileID);
+                    return;
+                end
+            end
+            if i~=arrayInfo.arrayNumber
+                while isempty(strip(dataSave{end}))
+                    dataSave{end+1}=fgetl(fileID); % Find next step
+                    if feof(fileID)==1
+                        msgbox('Cannot found SPIES part in STATIC_CONTROL.','Warning','warn');
+                        fclose(fileID);
+                        return;
+                    end
+                end
+            end
         end
         break;
     end
@@ -303,6 +332,7 @@ for lineNum=1:numel(dataSave)-1
     fwrite(fileID,newline);
 end
 % #.#.#.#. Modified section
+fwrite(fileID,newline);
 for spiesNum=1:numel(spiesSections)
     for argumentNum=1:numel(spiesSections{spiesNum})
         fwrite(fileID,spiesSections{spiesNum}{argumentNum});
