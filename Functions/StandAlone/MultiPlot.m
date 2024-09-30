@@ -931,30 +931,27 @@ else
         xlabel(ax,strcat('$\mathrm{',info.XLabel,'}$'),'Interpreter','latex');
     end
     % Y
-    groundNum=0;
-    for groundVar=groundsNames
-        groundNum=groundNum+1;
-        if ~isempty(info.(groundVar).Opts.Yyaxis)
-            yyaxis(ax,info.(groundVar).Opts.Yyaxis);
-            ind=groundNum;
-        else
-            ind=1:numel(info.YLabel);
-        end
-        if numel(info.YLabel)>=max(ind)
-            ylabel(ax,strcat('$\mathrm{',info.YLabel(ind),'}$'),'Interpreter','latex');
-        end
-        if isempty(info.(groundVar).Opts.Yyaxis)
-            break;
+    if ~isempty(info.YLabel)
+        groundNum=0;
+        for groundVar=groundsNames
+            groundNum=groundNum+1;
+            if ~isempty(info.(groundVar).Opts.Yyaxis)
+                yyaxis(ax,info.(groundVar).Opts.Yyaxis);
+                ind=groundNum;
+            else
+                ind=1:numel(info.YLabel);
+            end
+            if numel(info.YLabel)>=max(ind)
+                ylabel(ax,strcat('$\mathrm{',info.YLabel(ind),'}$'),'Interpreter','latex');
+            end
+            if isempty(info.(groundVar).Opts.Yyaxis)
+                break;
+            end
         end
     end
     % Z
-    if ~isempty(info.AxisColor)
-        set(ax,'XColor',info.AxisColor);
-        set(ax,'YColor',info.AxisColor);
-        if isfield(info.(groundsNames(groundNum)),'z') && ~isempty(info.ZLabel)
-            zlabel(ax,strcat('$\mathrm{',info.ZLabel,'}$'),'Interpreter','latex');
-            set(ax,'ZColor',info.AxisColor);
-        end
+    if ~isempty(info.ZLabel)
+        zlabel(ax,strcat('$\mathrm{',info.ZLabel,'}$'),'Interpreter','latex');
     end
     
     %% #. Figure
