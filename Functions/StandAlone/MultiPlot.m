@@ -889,9 +889,7 @@ else
     
     %% #. Axis
     % #.#. Format
-    if ~strcmpi(info.Grid,'on')
-        grid(ax,info.Grid);
-    end
+    grid(ax,info.Grid);
     if ~isempty(info.Title)
         title(ax,['$\mathrm{' info.Title '}$'],'Interpreter','latex');
         ax.Title.Color=info.AxisColor;
