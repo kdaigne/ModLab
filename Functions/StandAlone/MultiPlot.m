@@ -1134,30 +1134,28 @@ end
 % Local coordinates (relative to each node) are used because the number of
 % nodes for some bodies may change, and therefore the index of the node
 % we're targeting
-if any(strcmpi(type,'lagrangian'))
-    for groundVar=groundsNamesSurface
-        if ~isempty(info.(groundVar).Opts.Lagrangian)
-            if numel(info.(groundVar).Opts.Lagrangian)>1
-                if ~isempty(info.(groundVar).Opts.Lagrangian(2))
-                    % If body is specified, the node is taken from the body's frame of reference.
-                    body=info.(groundVar).Opts.Lagrangian(1);
-                    indLocalNode=info.(groundVar).Opts.Lagrangian(2:end);
-                    indGlobalNode=find(info.(groundVar).Opts.BodyIndex==body);
-                    indGlobalNode=indGlobalNode(indLocalNode);
-                else
-                    % Otherwise, we take the node in the global reference frame
-                    indGlobalNode=info.(groundVar).Opts.Lagrangian(1);
-                end
+groundVar=groundsNames(find(strcmpi(type,'lagrangian') & ismember(groundsNames,groundsNamesSurface),1,'first'));
+if ~isempty(groundVar)
+    if ~isempty(info.(groundVar).Opts.Lagrangian)
+        if numel(info.(groundVar).Opts.Lagrangian)>1
+            if ~isempty(info.(groundVar).Opts.Lagrangian(2))
+                % If body is specified, the node is taken from the body's frame of reference.
+                body=info.(groundVar).Opts.Lagrangian(1);
+                indLocalNode=info.(groundVar).Opts.Lagrangian(2:end);
+                indGlobalNode=find(info.(groundVar).Opts.BodyIndex==body);
+                indGlobalNode=indGlobalNode(indLocalNode);
             else
                 % Otherwise, we take the node in the global reference frame
                 indGlobalNode=info.(groundVar).Opts.Lagrangian(1);
             end
-            v=axis(ax);
-            deltaX=v(2)-v(1); deltaY=v(4)-v(3);
-            xM=mean(info.(groundVar).x(indGlobalNode)); yM=mean(info.(groundVar).y(indGlobalNode)); 
-            axis(ax,[xM-deltaX/2 xM+deltaX/2 yM-deltaY/2 yM+deltaY/2]);
-            break;
+        else
+            % Otherwise, we take the node in the global reference frame
+            indGlobalNode=info.(groundVar).Opts.Lagrangian(1);
         end
+        v=axis(ax);
+        deltaX=v(2)-v(1); deltaY=v(4)-v(3);
+        xM=mean(info.(groundVar).x(indGlobalNode)); yM=mean(info.(groundVar).y(indGlobalNode));
+        axis(ax,[xM-deltaX/2 xM+deltaX/2 yM-deltaY/2 yM+deltaY/2]);
     end
 end
 
