@@ -416,6 +416,15 @@ if colorbarNumber>=1
 end
 
 % #.#. Labels
+% #.#.#. Removes empty values
+for axisVar='XYZ'
+    if ~isempty(info.([axisVar 'Label'])) ...
+            && iscell(info.([axisVar 'Label'])) % e.g. lines with surfaces
+        indToRemove=cellfun(@isempty,info.([axisVar 'Label']));
+        info.([axisVar 'Label'])(indToRemove)=[];
+    end
+end
+% #.#.#. Plot
 if all(strcmpi(type,'plot'))
     if isempty(info.XLabel)
         info.XLabel='X';
