@@ -893,6 +893,10 @@ else
             catch
                 dh = datatip(h(hNum),0,0,0,'Visible','off'); % La création d'un datatip permet d'actualiser le graphique, sinon ils ne sont pas detectés
             end
+            if (strcmpi(type{groundNum},'image') || strcmpi(type{groundNum},'slices') || strcmpi(type{groundNum},'euler') || strcmpi(type{groundNum},'lagrangian') || strcmpi(type{groundNum},'planar') || strcmpi(type{groundNum},'radial')) ...
+                    && isfield(info.(groundVar),'data')
+                h(hNum).DataTipTemplate.DataTipRows(end).Label=replace(info.(groundVar).Opts.DataName,{'_' '~'},{' ' ' '}); % The name must be initialized, as it will not necessarily be included in the options for a refresh
+            end
             delete(dh);
         end
 
@@ -1123,7 +1127,7 @@ for groundVar=groundsNames
             && isfield(info.(groundVar),'data')
         % Applies corrective factors if ever the ground is normalized
         h=ax.Children(plotNum); % DataTipRows is not recognized if there is no this assignment (if we try to access ax.Children directly). There are a lot of issues with this property in general.
-        h.DataTipTemplate.DataTipRows(end)=dataTipTextRow(replace(info.(groundVar).Opts.DataName,{'_' '~'},{' ' ' '}), ...
+        h.DataTipTemplate.DataTipRows(end)=dataTipTextRow(h.DataTipTemplate.DataTipRows(end).Label, ...
             (h.CData-info.(groundVar).corr(1))./info.(groundVar).corr(2)+info.(groundVar).corr(3));
         h.DataTipTemplate.DataTipRows(end).Format='%.5e';
         h.DataTipTemplate.Interpreter='latex';
