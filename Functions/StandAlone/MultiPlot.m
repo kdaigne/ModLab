@@ -369,11 +369,15 @@ end
 
 % #.#. AxisColor
 if isempty(info.AxisColor)
-    nearestColor=imbinarize(rgb2gray(info.BackgroundColor),0.5);
-    if isequal(nearestColor,[1 1 1])
-        info.AxisColor=[0 0 0];
+    if isprop(ax.Parent,'BackgroundColor')
+        nearestColor=imbinarize(rgb2gray(ax.Parent.BackgroundColor),0.5);
+        if isequal(nearestColor,[1 1 1])
+            info.AxisColor=[0 0 0];
+        else
+            info.AxisColor=[1 1 1];
+        end
     else
-        info.AxisColor=[1 1 1];
+        info.AxisColor=[0 0 0];
     end
 end
 
@@ -405,7 +409,7 @@ if colorbarNumber>=1
     for groundVar=groundsNames
         groundNum=groundNum+1;
         if (strcmpi(info.(groundVar).Opts.ColorbarLocation,'outside') || colorbarNumber>2) &&  ~strcmpi(info.(groundVar).Opts.ColorbarLocation,'invisible') % Otherwise they overlap
-            colorbarLocList(sum(colorbarList(1:groundNum)))=strcat(colorbarLocList(sum(colorbarList(1:groundNum))),'Outside');
+            colorbarLocList(sum(colorbarList(1:groundNum)))=strcat(erase(colorbarLocList(sum(colorbarList(1:groundNum))),'Outside'),'Outside');
         end
     end
     kCol=0; % Determines the position of the colorbar
