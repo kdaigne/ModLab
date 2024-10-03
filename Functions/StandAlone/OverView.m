@@ -324,6 +324,6 @@ for groupNum=1:numel(axesToImport)
 end
 
 % #. Removes unused edges from a figure
-if strcmpi(opts.Parent.Type,'figure') || strcmpi(opts.Parent.Type,'uifigure')
-    BordersRemoving(ax.Parent,'Margins',0,'Pause',0.5,'Crop','Off','TicksOffset','Off');
-end
+% if strcmpi(opts.Parent.Type,'figure') || strcmpi(opts.Parent.Type,'uifigure')
+%     BordersRemoving(ax.Parent,'Margins',0,'Pause',0.5,'Crop','Off','TicksOffset','Off');
+% end
