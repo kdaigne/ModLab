@@ -1,2 +1,2 @@
 # GUI main view
-![GUI](UserGuide/gui_scheme.jpg)
+![GUI](UserGuide/gui_scheme.png)
