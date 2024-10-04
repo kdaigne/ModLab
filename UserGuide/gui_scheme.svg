@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="754.03479mm"
-   height="296.18646mm"
-   viewBox="0 0 754.03478 296.18646"
+   width="764.70172mm"
+   height="314.00485mm"
+   viewBox="0 0 764.70171 314.00484"
    version="1.1"
    id="svg1"
    xml:space="preserve"
@@ -27,16 +27,17 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.4159028"
-     inkscape:cx="1353.6817"
-     inkscape:cy="560.22705"
+     inkscape:zoom="0.36959868"
+     inkscape:cx="1447.516"
+     inkscape:cy="1048.4345"
      inkscape:window-width="1800"
-     inkscape:window-height="1051"
+     inkscape:window-height="1050"
      inkscape:window-x="0"
      inkscape:window-y="44"
-     inkscape:window-maximized="1"
+     inkscape:window-maximized="0"
      inkscape:current-layer="layer1"
-     inkscape:export-bgcolor="#ffffffff" /><defs
+     inkscape:export-bgcolor="#ffffffff"
+     showguides="false" /><defs
      id="defs1"><marker
        style="overflow:visible"
        id="Triangle"
@@ -158,7 +159,14 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(272.75304,-28.319496)"><image
+     transform="translate(278.40765,-16.93795)"><rect
+       style="fill:#e3dedb;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-dasharray:none"
+       id="rect1"
+       width="762.70172"
+       height="312.00485"
+       x="-277.40765"
+       y="17.93795"
+       ry="13.419562" /><image
        width="517.87775"
        height="279.04724"
        preserveAspectRatio="none"
@@ -268,4 +276,11 @@
        inkscape:path-effect="#path-effect5-9-2-8"
        inkscape:original-d="m 396.68753,112.20005 c -10.16776,15.46431 -20.3353,30.92827 -30.50327,46.3929 -12.0782,2.32235 -24.1559,4.64461 -36.23385,6.96692"
        sodipodi:nodetypes="ccc"
-       transform="matrix(-0.28927992,0.95724455,0.95724455,0.28927992,-159.44204,-122.48574)" /></g></svg>
+       transform="matrix(-0.28927992,0.95724455,0.95724455,0.28927992,-159.44204,-122.48574)" /><rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2.01586;stroke-linecap:round;stroke-dasharray:none"
+       id="rect4"
+       width="495.2522"
+       height="246.70575"
+       x="-143.2032"
+       y="27.354633"
+       ry="0.10296076" /></g></svg>
