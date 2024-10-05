@@ -1,4 +1,4 @@
-# GUI main view
+# Main view
 ![GUI](UserGuide/gui_scheme.png)
 # Prerequisites
 The following components are required:
