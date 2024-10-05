@@ -20,7 +20,7 @@ spiesInfo=MelodyArrayInfo(pathSimu);
 % #. Initialization
 if isfile(pathHeaders)
     headersSave=load(pathHeaders);
-    indToRemove=ismember(headersSave.headersFile,[{'FIELDS_' 'GRAINS_' 'CONTOURS_' 'CHAINS_'} reshape([spiesInfo.nameArrayCell{:}],1,[])]);
+    indToRemove=ismember(headersSave.headersFile,{'FIELDS_' 'GRAINS_' 'CONTOURS_' 'CHAINS_'}) | ismember(headersSave.headersType,{'UNIQUE'});
     headersSave.headersClass(indToRemove)=[];
     headersSave.headersColumn(indToRemove)=[];
     headersSave.headersExt(indToRemove)=[];
