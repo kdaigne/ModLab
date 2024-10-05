@@ -1,6 +1,6 @@
 # Abstract
 
-ModLab is a graphical user interface (GUI) developed in MATLAB (and some additional features using shell and batch scripts). It groups together several functionalities needed to manage simulations (text editor, local and remote command prompts, data viewer, etc.). This simplifies simulation processing and enables the different modules to interact with each other. The GUI is made up of several interconnected blocks, as shown below.
+ModLab is a graphical user interface (GUI) developed in MATLAB (and some additional features using shell and batch scripts). It groups together several functionalities needed to manage simulations (text editor, local and remote command prompts, data viewer, etc.). This simplifies simulation processing and enables the different modules to interact with each other.
 
 ![GUI](UserGuide/gui_scheme.png)
 
@@ -14,6 +14,8 @@ The following components are required:
 An older version of MATLAB may work, but some features will be inaccessible, leading to errors. To start the GUI, double-click on ModLab.lnk (the shortcut in the main folder). If it does not work (e.g. for macOS), double-click on \Functions\Management\main.mlapp.
 
 # Structure
+
+The GUI is made up of several interconnected blocks, as shown below:
 
 ![GUI](UserGuide/architecture.png)
 
