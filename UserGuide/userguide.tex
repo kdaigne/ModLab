@@ -65,7 +65,7 @@ The following components are required:
     \item Toolbox: Statistics and Machine Learning Toolbox
 \end{itemize}
 
-An older version of MATLAB may work, but some features will be inaccessible, leading to errors. To start the GUI, double-click on \path{ModLab.lnk} (the shortcut in the main folder). If it does not work (e.g. for macOS), double-click on \path{\Functions\Management\main.mlapp}.
+An older version of MATLAB may work, but some features will be inaccessible, leading to errors. To start the GUI, double-click on \path{ModLab.lnk} (the shortcut in the main folder). If it does not work (e.g. for macOS), double-click on \path{\Functions\Management\main.mlapp}. To transfer data to a remote server, see \cref{clusterPreSec}.
 
 \section{Simulation folder}
 
@@ -91,7 +91,7 @@ There are no restrictions on saving other files in the main folder or creating o
 
 \subsection{Remote server (cluster)}
 
-\subsubsection{Prerequisites}
+\subsubsection{Prerequisites}\label{clusterPreSec}
 
 There are currently 3 methods available (only one is required for operation).\\
 
@@ -162,7 +162,7 @@ In the tools panel, click on the name to open the readme file (important to avoi
 
 \subsection{Add new tool}
 
-To define a tool, create a folder whose name will define the tool name. Inside, create a MATLAB file, whose name will define the action to follow. Two actions are available (both can be used in the same tool):
+In \textbackslash Tools, create a folder whose name will define the tool name. Inside, create a MATLAB file, whose name will define the action to follow. Two actions are available (both can be used in the same tool):
 
 \begin{itemize}
     \item mainOpen.m : opens this file when the tool is checked
