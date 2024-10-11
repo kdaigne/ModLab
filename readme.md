@@ -11,7 +11,7 @@ The following components are required:
 - Toolbox: Image Processing Toolbox
 - Toolbox: Statistics and Machine Learning Toolbox
 
-An older version of MATLAB may work, but some features will be inaccessible, leading to errors. To start the GUI, double-click on ModLab.lnk (the shortcut in the main folder). If it does not work (e.g. for macOS), double-click on \Functions\Management\main.mlapp.
+An older version of MATLAB may work, but some features will be inaccessible, leading to errors. To start the GUI, double-click on ModLab.lnk (the shortcut in the main folder). If it does not work (e.g. for macOS), double-click on \Functions\Management\main.mlapp. To transfer data to a remote server, see user guide.
 
 # Structure
 
