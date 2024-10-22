@@ -402,6 +402,8 @@ if fig.Children(indoutputRadio).Children(3).Value==1
     plot(fig.Children(indoutputAxes),input1Vect,v0Plot,'bx');
     plot(fig.Children(indinputAxes),tPlot,pPlot,'-r');
     plot(fig.Children(indoutputAxes),tPlot,vPlot,'-r');
+    xlabel(fig.Children(indoutputAxes),'Time');
+    ylabel(fig.Children(indoutputAxes),'Velocity');
     hold(fig.Children(indinputAxes),'off');
     hold(fig.Children(indoutputAxes),'off');
     % #.#. Output
@@ -424,6 +426,8 @@ elseif fig.Children(indoutputRadio).Children(2).Value==1
     plot(fig.Children(indoutputAxes),input1Vect,p0Plot,'bx');
     plot(fig.Children(indinputAxes),tPlot,vPlot,'-r');
     plot(fig.Children(indoutputAxes),tPlot,pPlot,'-r');
+    xlabel(fig.Children(indoutputAxes),'Time');
+    ylabel(fig.Children(indoutputAxes),'Position');
     hold(fig.Children(indinputAxes),'off');
     hold(fig.Children(indoutputAxes),'off');
     % #.#. Output
@@ -460,12 +464,15 @@ elseif fig.Children(indoutputRadio).Children(1).Value==1
     plot(fig.Children(indoutputAxes),tVect,input1Vect,'x');
     plot(fig.Children(indoutputAxes),tPlot,pPlot,'-');
     hold(fig.Children(indoutputAxes),'off');
+    xlabel(fig.Children(indoutputAxes),'Time');
+    ylabel(fig.Children(indoutputAxes),'Position');
     % #.#.#. Velocity(time)
     yyaxis(fig.Children(indoutputAxes),'right')
     hold(fig.Children(indoutputAxes),'on');
     plot(fig.Children(indoutputAxes),tVect,input2Vect,'x');
     plot(fig.Children(indoutputAxes),tPlot,vPlot,'-');
     hold(fig.Children(indoutputAxes),'off');
+    ylabel(fig.Children(indoutputAxes),'Velocity');
     % #.#. Output
     % #.#.#. Output only
     fig.Children(indoutputOnly).Value=...
