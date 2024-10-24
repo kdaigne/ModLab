@@ -32,6 +32,8 @@ if ~info.selection.other.customMode
 
     %% #. STANDARD
 
+    % -> A breakpoint can be inserted here to understand the structure and modify it accordingly <-
+
     % info=periodicRepetition(info,1,[]); % interesting for a Lagrangian view with periodic conditions
 
     ax=MultiPlot(ax,info.grounds,info.opts);
