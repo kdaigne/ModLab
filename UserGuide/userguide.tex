@@ -34,12 +34,37 @@
 
 \section{Overview}
 
-ModLab is a graphical user interface (GUI) developed in MATLAB (and some additional features using shell and batch scripts). It groups together several functionalities needed to manage simulations (text editor, local and remote command prompts, data viewer, etc.). This simplifies simulation processing and enables the different modules to interact with each other. The GUI is made up of several interconnected blocks, as shown in \cref{modlabArch}.
+ModLab is a graphical user interface (GUI) developed in MATLAB (and some additional features using shell and batch scripts). It groups together several functionalities needed to manage simulations (text editor, local and remote command prompts, data viewer, etc.). This simplifies simulation processing and enables the different modules to interact with each other. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{gui_scheme.pdf}
+\caption{Screenshot of the GUI}
+\label{guiSchemeLab}
+\end{figure}
+
+\section{Prerequisites}
+
+The following components are required:
+
+\begin{itemize}
+    \item MATLAB R2024a (with App Designer)
+    \item Toolbox: Image Processing Toolbox
+    \item Toolbox: Statistics and Machine Learning Toolbox
+\end{itemize}
+
+An older version of MATLAB may work, but some features will be inaccessible, leading to errors. To start the GUI, double-click on \path{ModLab.lnk} (the shortcut in the main folder). If it does not work (e.g. for macOS), double-click on \path{\Functions\Management\main.mlapp}. To transfer data to a remote server, see \cref{clusterPreSec}.\newline
+\par
+See example\_simu\_to\_select (file must be unzipped) for a simulation example.
+
+\section{Structure}
+
+The GUI is made up of several interconnected blocks, as shown in \cref{modlabArch}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{architecture.pdf}
-\caption{ModLab structure}
+\caption{Structure}
 \label{modlabArch}
 \end{figure}
 
@@ -54,18 +79,6 @@ The main purpose of this structure is to bring all the complexity into a single 
 \end{itemize}
 
 There are several subfolders containing functions used by the GUI. In particular, \textbackslash Custom stores all custom functions developed by the user, which can then be called from the data manager, GUI, plot manager and tools.
-
-\section{Prerequisites}
-
-The following components are required:
-
-\begin{itemize}
-    \item MATLAB R2024a (with App Designer)
-    \item Toolbox: Image Processing Toolbox
-    \item Toolbox: Statistics and Machine Learning Toolbox
-\end{itemize}
-
-An older version of MATLAB may work, but some features will be inaccessible, leading to errors. To start the GUI, double-click on \path{ModLab.lnk} (the shortcut in the main folder). If it does not work (e.g. for macOS), double-click on \path{\Functions\Management\main.mlapp}. To transfer data to a remote server, see \cref{clusterPreSec}.
 
 \section{Simulation folder}
 
