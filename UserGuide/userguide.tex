@@ -207,13 +207,15 @@ Create a subfolder named ''Local'' and place all the package in it. The first ex
 Create a subfolder named ''Cluster'' and place all the package in it. Set up a launcher for each server, with the following file name: ''Launcher\_serverFormat''. ServerFormat corresponds to the server name in lower case, replacing all special characters by ''\_''. The MATLAB command below can be used to find the launcher name.
 \newline\newline
 \verb|serverName='example.fr';|\\
+\verb|format='.sh';|\\
 \verb|LauncherName=['Launcher_' ...|\\
 \verb|lower(replace(serverName,{'[',' ','!','"','#','$','%','&','(',')','*','+',',','-', ...|\\
 \verb|'.','/',':',';', ...|\\
-\verb|'<','=','>','?','@','\','^','_','`','''','{','}','~',']'},'_'))]|\\
+\verb|'<','=','>','?','@','\','^','_','`','''','{','}','~',']'},'_'))];|\\
+\verb|LauncherName=[LauncherName format];|\\
 \newline
 The result is:\\
-\verb|LauncherName = 'Launcher_example_fr'|
+\verb|LauncherName = 'Launcher_example_fr.sh'|
 
 \section{Data}
 
