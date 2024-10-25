@@ -14,7 +14,7 @@ tabNumber=findTab(app);
 pathSimu=app.TabGroup.Children(tabNumber).Children(app.id.gridTabNumber).Children(app.id.gridProcessingNumber).Children(app.id.SAVEPanelNumber).Children(app.id.gridSaveNumber).Children(app.id.displayPathNumber).Value;
 
 % #. Node selection
-[body,nodeGlob,nodeLoc]=graphSelection(app,tabNumber,[],[],[]);
+[body,nodeGlob,nodeLoc]=graphSelection(app,tabNumber,[],[],[],1);
 if isempty(body) || isempty(nodeGlob) || isempty(nodeLoc)
     busyOff(app); return;
 else
