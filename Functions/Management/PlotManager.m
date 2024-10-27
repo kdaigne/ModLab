@@ -33,8 +33,13 @@ if ~info.selection.other.customMode
     %% #. STANDARD
 
     % -> A breakpoint can be inserted here to understand the structure and modify it accordingly <-
+    
+    % There are 3 main structures that can be modified (the others are simply additional data):
+    % info.grounds.ground<num> : contains all the ground data (e.g. connectivity)
+    % info.grounds.ground<num>.opts : contains all the ground option (e.g. DataLim)
+    % info.opts : contains all the axes option (e.g. XLim)
 
-    % info=periodicRepetition(info,1,[]); % interesting for a Lagrangian view with periodic conditions
+    % info=periodicRepetition(info,1,[0 6e-6]); % interesting for a Lagrangian view with periodic conditions
 
     ax=MultiPlot(ax,info.grounds,info.opts);
 
