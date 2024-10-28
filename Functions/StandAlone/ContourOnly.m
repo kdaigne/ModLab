@@ -12,7 +12,7 @@
 % x = 1*N0 double : x coordinates
 % y = 1*N0 double : y coordinates
 %% - Options -
-% 'BodyIndexReal' = 1*N0 double : 
+% 'BodyIndexMesh' = 1*N0 double : 
 %   - Body index of each node based on the mesh (it does not take into account the deactivations, periodic boundaries, etc.)
 %   - It will be computed automatically if it is not defined here
 %% - Ouputs -
@@ -21,20 +21,20 @@
 % y = 1*N1 double : y coordinates
 % indNodes = 1*N0 logical : Logical indices of the nodes that define the contour of each body
 % edges = E*[node1,node2] : Linear indices of the nodes that define each edge on the contour of each body (beam connectivity matrix)
-% bodyIndexReal = 1*N1 double : body index of each node (/!\ based on the mesh, it does not take into account the deactivations, periodic boundaries, etc.)
+% BodyIndexMesh = 1*N1 double : body index of each node (/!\ based on the mesh, it does not take into account the deactivations, periodic boundaries, etc.)
 %% -
 
-function [connectivity,x,y,indNodes,edges,bodyIndexReal]=ContourOnly(connectivity,x,y,varargin)
+function [connectivity,x,y,indNodes,edges,BodyIndexMesh]=ContourOnly(connectivity,x,y,varargin)
 
 %%  #. Options
 p=inputParser;
-addOptional(p,'BodyIndexReal',[]);
+addOptional(p,'BodyIndexMesh',[]);
 parse(p,varargin{:});
 opts=p.Results;
-if isempty(opts.BodyIndexReal)
-    bodyIndexReal=ConnectivityToBodiesList(connectivity);
+if isempty(opts.BodyIndexMesh)
+    BodyIndexMesh=ConnectivityToBodiesList(connectivity);
 else
-    bodyIndexReal=opts.BodyIndexReal;
+    BodyIndexMesh=opts.BodyIndexMesh;
 end
 
 %% #. Initialization
@@ -79,16 +79,16 @@ edges=edgesUnique(groupcounts(edges)==1,:); % An edge is a contour edge only if 
 indNodes=false(1,nodesNumber); indNodes(unique(edges))=1; % Logical indices of the nodes on the contour
 
 %% #. Body index
-% [bodyIndexRealTemp]=ConnectivityToBodiesList(edges);
-% bodyIndexReal=[bodyIndexRealTemp NaN(1,nodesNumber-numel(bodyIndexRealTemp))]; % Otherwise the size may be different than x/y
+% [BodyIndexMeshTemp]=ConnectivityToBodiesList(edges);
+% BodyIndexMesh=[BodyIndexMeshTemp NaN(1,nodesNumber-numel(BodyIndexMeshTemp))]; % Otherwise the size may be different than x/y
 
 %% #. Connectivity
 % As several nodes have been removed, the mesh must be regenerated
-bodiesList=unique(bodyIndexReal(indNodes)); bodiesList(isnan(bodiesList))=[]; bodiesNumber=numel(bodiesList);
+bodiesList=unique(BodyIndexMesh(indNodes)); bodiesList(isnan(bodiesList))=[]; bodiesNumber=numel(bodiesList);
 connectivity=cell(1,bodiesNumber);
 for bodyNum=1:bodiesNumber
     % #.#. Indices
-    indBodyNodes=indNodes & reshape(bodyIndexReal==bodiesList(bodyNum),1,[]); % Indices of the current body nodes
+    indBodyNodes=indNodes & reshape(BodyIndexMesh==bodiesList(bodyNum),1,[]); % Indices of the current body nodes
     indBodyNodesLinear=find(indBodyNodes); % Linear indices are required
     % #.#. Edges on the contour
     % Useful for isInterior
@@ -120,4 +120,4 @@ connectivity=vertcat(connectivity{:}); % Global connectivity matrix
 connectivity=NodesRemoving(connectivity,~indNodes);
 x(~indNodes)=[];
 y(~indNodes)=[];
-bodyIndexReal(~indNodes)=[];
+BodyIndexMesh(~indNodes)=[];

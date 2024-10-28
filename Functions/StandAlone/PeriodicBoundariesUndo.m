@@ -39,7 +39,7 @@ if isempty(opts.BodyIndexMesh)
 else
     BodyIndexMesh=opts.BodyIndexMesh;
 end
-bodyIndex=opts.bodyIndex;
+bodyIndex=opts.BodyIndex;
 
 %% #. Initialization
 bodiesList=unique(bodyIndex); bodiesNumber=numel(bodiesList); 

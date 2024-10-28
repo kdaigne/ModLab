@@ -37,7 +37,7 @@ addOptional(p,'NodesToRemove',[]);
 addOptional(p,'Contour','Off');
 addOptional(p,'Periodic',[]);
 addOptional(p,'BodyIndex',[]);
-addOptional(p,'BodyIndexReal',[]);
+addOptional(p,'BodyIndexMesh',[]);
 addOptional(p,'Sort','Off');
 parse(p,varargin{:});
 opts=p.Results;
@@ -78,7 +78,7 @@ end
 %% #. Contour nodes
 % Contour nodes are computed using the connectivity matrix because a contour edge must appear only once in this matrix
 if strcmpi(opts.Contour,'on')
-    [connectivity,x,y,indNodesContour,~,opts.BodyIndexMesh]=ContourOnly(connectivity,x,y,'BodyIndex',opts.BodyIndex);
+    [connectivity,x,y,indNodesContour,~,opts.BodyIndexMesh]=ContourOnly(connectivity,x,y,'BodyIndexMesh',opts.BodyIndexMesh);
     indNodes(~indNodesContour)=[];
     if ~isempty(opts.BodyIndex)
         opts.BodyIndex(~indNodesContour)=[];
