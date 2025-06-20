@@ -72,9 +72,13 @@ for numBody=[lowerBody upperBody]
     end
     % #.#. Output
     if numBody==lowerBody
-        frame.yMin=mean(Y(indBody(indToKeep)));
+        frame.lower.min=min(Y(indBody(indToKeep)));
+        frame.lower.mean=mean(Y(indBody(indToKeep)));
+        frame.lower.max=max(Y(indBody(indToKeep)));
     else
-        frame.yMax=mean(Y(indBody(indToKeep)));
+        frame.upper.min=min(Y(indBody(indToKeep)));
+        frame.upper.mean=mean(Y(indBody(indToKeep)));
+        frame.upper.max=max(Y(indBody(indToKeep)));
     end
 end
 
