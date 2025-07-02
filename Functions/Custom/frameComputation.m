@@ -75,11 +75,72 @@ for numBody=[lowerBody upperBody]
         frame.lower.min=min(Y(indBody(indToKeep)));
         frame.lower.mean=mean(Y(indBody(indToKeep)));
         frame.lower.max=max(Y(indBody(indToKeep)));
+        frame.lower.X=X(indBody(indToKeep));
+        frame.lower.Y=Y(indBody(indToKeep));
     else
         frame.upper.min=min(Y(indBody(indToKeep)));
         frame.upper.mean=mean(Y(indBody(indToKeep)));
         frame.upper.max=max(Y(indBody(indToKeep)));
+        frame.upper.X=X(indBody(indToKeep));
+        frame.upper.Y=Y(indBody(indToKeep));
     end
 end
-
+% #. Box
+% The comment text corresponds to a version where the junction between the
+% upper and lower bodies is discretized to avoid numerical issues in
+% certain functions.
+% Counterclockwise
+if frame.lower.X(1)<frame.lower.X(end)
+    frame.box.X=frame.lower.X;
+    frame.box.Y=frame.lower.Y;
+else
+    frame.box.X=flip(frame.lower.X);
+    frame.box.Y=flip(frame.lower.Y);
+end
+%borderDelta=sqrt((frame.box.X(2)-frame.box.X(1)).^2+(frame.box.Y(2)-frame.box.Y(1)).^2);
+if frame.upper.X(1)>frame.upper.X(end)
+    % % Right
+    % borderRightHeight=frame.upper.Y(1)-frame.box.Y(end);
+    % borderRightN=round(borderRightHeight./borderDelta-1);
+    % borderRightY=linspace(frame.box.Y(end),frame.upper.Y(1),borderRightN)';
+    % borderRightY(1)=[];
+    % borderRightY(end)=[];
+    % borderRightX=ones(size(borderRightY)).*frame.box.X(end);
+    % % Left
+    % borderLeftHeight=frame.upper.Y(end)-frame.box.Y(1);
+    % borderLeftN=round(borderLeftHeight./borderDelta-1);
+    % borderLeftY=linspace(frame.box.Y(1),frame.upper.Y(end),borderLeftN)';
+    % borderLeftY(1)=[];
+    % borderLeftY(end)=[];
+    % borderLeftX=ones(size(borderLeftY)).*frame.box.X(1);
+    % % Concat
+    % frame.box.X=[frame.box.X ; borderRightX ; frame.upper.X ; borderLeftX];
+    % frame.box.Y=[frame.box.Y ; borderRightY ; frame.upper.Y ; borderLeftY];
+    % Light
+    frame.box.X=[frame.box.X ; frame.upper.X];
+    frame.box.Y=[frame.box.Y ; frame.upper.Y];
+else
+    % % Right
+    % borderRightHeight=frame.upper.Y(end)-frame.box.Y(end);
+    % borderRightN=round(borderRightHeight./borderDelta-1);
+    % borderRightY=linspace(frame.box.Y(end),frame.upper.Y(end),borderRightN)';
+    % borderRightY(1)=[];
+    % borderRightY(end)=[];
+    % borderRightX=ones(size(borderRightY)).*frame.box.X(end);
+    % % Left
+    % borderLeftHeight=frame.upper.Y(1)-frame.box.Y(1);
+    % borderLeftN=round(borderLeftHeight./borderDelta-1);
+    % borderLeftY=linspace(frame.box.Y(1),frame.upper.Y(1),borderLeftN)';
+    % borderLeftY(1)=[];
+    % borderLeftY(end)=[];
+    % borderLeftX=ones(size(borderLeftY)).*frame.box.X(1);
+    % % Concat
+    % frame.box.X=[frame.box.X ; borderRightX ; flip(frame.upper.X) ; borderLeftX];
+    % frame.box.Y=[frame.box.Y ; borderRightY ; flip(frame.upper.Y) ; borderLeftY];
+    % Light
+    frame.box.X=[frame.box.X ; flip(frame.upper.X)];
+    frame.box.Y=[frame.box.Y ; flip(frame.upper.Y)];
+end
+%frame.box.X=[frame.box.X ; frame.box.X(1)]; % closed contour
+%frame.box.Y=[frame.box.Y ; frame.box.Y(1)]; % closed contour
 end
